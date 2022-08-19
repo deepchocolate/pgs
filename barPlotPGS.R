@@ -19,6 +19,7 @@
 # @param character population/stratification variable to select on.
 #
 barPlotPGS <- function (dta, exposure, mdl, population) {
+  require(ggplot2)
   dta <- subset(dta, exposure==exposure & modelType==mdl & Population==population) {
   plt <- ggplot(dta, aes(y=coef, x=outcome, fill=model) x=outcome, fill=model) +
     geom_bar(stat=’identity’, position=position_dodge()) + 
