@@ -18,7 +18,7 @@ stdVar <- function (x) {
 #' @param clustering Pass the name of the clustering variable in dta to add cluster robust confidence intervals.
 #' @param A data.frame with results.
 regCompact <- function (phenotype, exposure, covariates, binary, dta, clustering=F) {
-  frm <-  as.formula(paste0(phenotype, '~', expoure, '+', covariates))
+  frm <-  as.formula(paste0(phenotype, '~', exposure, '+', covariates))
   fam <- ifelse(binary == T, 'binomial', 'gaussian')
   dta[, exposure] <- stdVar(dta[, exposure])
   if (binary == F) dta[, phenotype] <- stdVar(dta[, phenotype])
@@ -30,11 +30,12 @@ regCompact <- function (phenotype, exposure, covariates, binary, dta, clustering
   } else {
     require(fmsb)
     m2 <- update(m, as.formula(paste0('. ~ . -', exposure)))
-    R2 <- NagelKerkeR2(m)$R2 - NagelKerkeR2(m2)$R2
+    R2 <- NagelkerkeR2(m)$R2 - NagelkerkeR2(m2)$R2
   }
-  confin <- confint.default(m)[expoure, ] # Use asymptotic std errs
+  confin <- confint.default(m)[exposure, ] # Use asymptotic std errs
   out <- data.frame(
     phenotype=phenotype,
+    expoure=exposure,
     beta=cfs[1], stderr=cfs[2], z=cfs[3], p=cfs[4], # Beta, SE, Z, P
     l95=confin[1], u95=confin[2], # Asymptotic CI
     l95r='', u95r='', # Cluster-robust CI if applicable
