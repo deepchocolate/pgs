@@ -1,3 +1,4 @@
 # pgs
-Just random stuff about polygenic scores (PGS)
+Just random stuff used in the context of polygenic scores (PGS)
+
 Use at your own risk
