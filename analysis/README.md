@@ -1,4 +1,7 @@
-# Test data in R (will give some warnings)
+# Test data in R
+
+Showing some replacements one can make in `example.R` to make it run. This will produce som warnings
+as this is a small sample.
 ```
 data(mtcars)
 dta <- mtcars
